@@ -8,14 +8,14 @@ builder.Services.AddControllersWithViews();
 //builder.Services.AddRazorPages().AddRazorRuntimeCompilation(); //for runtime compilation
 
 //AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
-builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseNpgsql(
+/*builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseNpgsql(
             builder.Configuration.GetConnectionString("DefaultConnection2")
     ));
+*/
 
-
-/*builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(
-            builder.Configuration.GetConnectionString("DefaulConnection")   
-    ));*/
+builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(
+            builder.Configuration.GetConnectionString("DefaulConnection")
+    ));
 
 var app = builder.Build();
 
