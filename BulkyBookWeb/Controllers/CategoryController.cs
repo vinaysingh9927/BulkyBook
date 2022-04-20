@@ -43,7 +43,8 @@ namespace BulkyBookWeb.Controllers
             if (ModelState.IsValid)     //havor on ModelState and check(Values>Result Values) if any propertie valid or not here 
             {
                 _db.Categories.Add(obj);   
-                _db.SaveChanges();       
+                _db.SaveChanges();
+                TempData["success"] = "Category created successfully";
                 return RedirectToAction("Index"); 
             }
             return View(obj);
@@ -90,6 +91,7 @@ namespace BulkyBookWeb.Controllers
             {
                 _db.Categories.Update(obj); //update for this 
                 _db.SaveChanges();
+                TempData["success"] = "Category updated successfully";
                 return RedirectToAction("Index");
             }
             return View(obj);
@@ -117,28 +119,20 @@ namespace BulkyBookWeb.Controllers
         }
 
         //Post
-        [HttpPost]
+        [HttpPost,ActionName("Delete")]
         [AutoValidateAntiforgeryToken]  
-        public IActionResult Delete(Category obj)  //in validation check model is valid or not (Require properties have or not)
+        public IActionResult DeletePOST(int? id)  //in validation check model is valid or not (Require properties have or not)
         {
-            //costom validation
-            if (obj.Name == obj.DisplayOrder.ToString())
+            var obj = _db.Categories.Find(id);
+            if(obj == null)
             {
-                //key       error
-                //ModelState.AddModelError("CustomError","The DisplayOrder cannot be exactly match the Name.");
-                ModelState.AddModelError("Name", "The DisplayOrder cannot be exactly match the Name.");
-
+                return NotFound();
             }
 
-
-            //check properties validation 
-            if (ModelState.IsValid)     //havor on ModelState and check(Values>Result Values) if any propertie valid or not here 
-            {
-                _db.Categories.Remove(obj); //update for this 
-                _db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(obj);
+            _db.Categories.Remove(obj); //remove for this 
+            _db.SaveChanges();
+            TempData["success"] = "Category deleted successfully";
+            return RedirectToAction("Index"); 
         }
     }
 }
