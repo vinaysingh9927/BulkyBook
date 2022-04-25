@@ -1,5 +1,5 @@
-﻿using BulkyBook.Models;
-using BulkyBookWeb.Data;
+﻿using BulkyBook.DataAccess;
+using BulkyBook.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BulkyBookWeb.Controllers
@@ -15,7 +15,7 @@ namespace BulkyBookWeb.Controllers
 
         public IActionResult Index()
         {
-            IEnumerable<Category> objCategoryList = _db.Categories;
+            IEnumerable<Category> objCategoryList = _db.Categories; //retreive the category 
             return View(objCategoryList);
         }
 
@@ -42,7 +42,7 @@ namespace BulkyBookWeb.Controllers
             //check properties validation 
             if (ModelState.IsValid)     //havor on ModelState and check(Values>Result Values) if any propertie valid or not here 
             {
-                _db.Categories.Add(obj);   
+                _db.Categories.Add(obj);   //add to category
                 _db.SaveChanges();
                 TempData["success"] = "Category created successfully";
                 return RedirectToAction("Index"); 
@@ -62,14 +62,14 @@ namespace BulkyBookWeb.Controllers
                 return NotFound();
             }
             //way of retreive category
-            var categoryFromDb = _db.Categories.Find(id);  //based on the primary key it find  
-            //var categoryFromDbFirst = _db.Categories.FirstOrDefault(u=>u.ID == id); //not throw exception and return first element of the list 
+            //var categoryFromDb = _db.Categories.Find(id);  //based on the primary key it find  
+            var categoryFromDbFirst = _db.Categories.FirstOrDefault(u=>u.ID == id); //not throw exception and return first element of the list 
             //var categoryFromDbSingle = _db.Categories.SingleOrDefault(u=>u.ID == id); //throw an exception
-            if (categoryFromDb == null) 
+            if (categoryFromDbFirst == null) 
             {
                 return NotFound();
             }
-            return View(categoryFromDb);
+            return View(categoryFromDbFirst);
         }
         //Post
         [HttpPost]
