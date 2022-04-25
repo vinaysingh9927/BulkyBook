@@ -16,10 +16,10 @@ namespace BulkyBook.DataAccess.Repository.IRepository
             _db = db;
         }
 
-        public void Save()
+        /*public void Save()  //shift it to the UnitOfWork
         {
             _db.SaveChanges();
-        }
+        }*/
          
         public void Update(Category obj)
         {

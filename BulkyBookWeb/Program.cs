@@ -1,4 +1,5 @@
 using BulkyBook.DataAccess;
+using BulkyBook.DataAccess.Repository;
 using BulkyBook.DataAccess.Repository.IRepository;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,7 +18,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlSer
             builder.Configuration.GetConnectionString("DefaulConnection")
     ));
 
-builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+//builder.Services.AddScoped<ICategoryRepository, CategoryRepository>(); //replace by UnitOfWork
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>(); //use for take care all the Repository
 //builder.Services.AddRazorPages().AddRazorRuntimeCompilation(); //for runtime compilation
 var app = builder.Build();
 

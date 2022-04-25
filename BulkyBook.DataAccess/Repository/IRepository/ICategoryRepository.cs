@@ -10,7 +10,8 @@ namespace BulkyBook.DataAccess.Repository.IRepository
     public interface ICategoryRepository : IRepository<Category>
     {
         void Update(Category obj); //for update this method require in Category
-
-        void Save(); //to save the file
+        
+        //shift to in UnitOfWork
+        //void Save(); //to save the file
     }
 }
