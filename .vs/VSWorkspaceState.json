@@ -1,7 +1,8 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\BulkyBookWeb"
   ],
-  "SelectedNode": "\\BulkyBook.sln",
+  "SelectedNode": "\\BulkyBookWeb\\Controllers",
   "PreviewInSolutionExplorer": false
 }
