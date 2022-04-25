@@ -25,6 +25,7 @@ namespace BulkyBookWeb.Controllers
         {
             return View();
         }
+
         //Post
         [HttpPost]
         [AutoValidateAntiforgeryToken]
