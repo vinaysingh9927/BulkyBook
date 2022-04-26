@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BulkyBookWeb.Controllers
 {
+    [Area("Admin")]  //explicity - not required it automatically find
     public class CategoryController : Controller
     {
         //private readonly ApplicationDbContext _db;
