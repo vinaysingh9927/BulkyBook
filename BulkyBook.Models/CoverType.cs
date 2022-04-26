@@ -14,7 +14,7 @@ namespace BulkyBook.Models
 
         [Display(Name ="Covet Type")]
         [Required]
-        [Range (0,50)]
+        [MaxLength(50)]
         public string Name { get; set; }
     }
 }
