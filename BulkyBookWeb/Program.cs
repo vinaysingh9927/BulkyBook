@@ -1,11 +1,12 @@
 using BulkyBook.DataAccess;
+using BulkyBook.DataAccess.Repository;
+using BulkyBook.DataAccess.Repository.IRepository;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args); 
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-//builder.Services.AddRazorPages().AddRazorRuntimeCompilation(); //for runtime compilation
 
 //AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 /*builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseNpgsql(
@@ -17,6 +18,9 @@ builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlSer
             builder.Configuration.GetConnectionString("DefaulConnection")
     ));
 
+//builder.Services.AddScoped<ICategoryRepository, CategoryRepository>(); //replace by UnitOfWork
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>(); //use for take care all the Repository
+//builder.Services.AddRazorPages().AddRazorRuntimeCompilation(); //for runtime compilation
 var app = builder.Build();
 
 
