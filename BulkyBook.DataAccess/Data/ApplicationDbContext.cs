@@ -14,5 +14,6 @@ namespace BulkyBook.DataAccess
         //each model we have to create DbSet
         public DbSet<Category> Categories { get; set; }
         public DbSet<CoverType> CoverTypes { get; set; }  //CoverTypes table name created in database
-    }
+        public DbSet<Product> Products { get; set; }  //Product table name created in database
+    } 
 }  
