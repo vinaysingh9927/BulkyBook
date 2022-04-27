@@ -1,10 +1,12 @@
 ﻿using BulkyBook.DataAccess;
 using BulkyBook.DataAccess.Repository.IRepository;
 using BulkyBook.Models;
+using BulkyBook.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace BulkyBookWeb.Controllers;
+namespace BulkyBookWeb.Controllers
+{
     [Area("Admin")]  //explicity - not required it automatically find
     public class ProductController : Controller
     {
@@ -24,51 +26,54 @@ namespace BulkyBookWeb.Controllers;
         }
 
 
-    //Update+Insert both Functionality in same action Upsert
+        //Update+Insert both Functionality in same action Upsert
 
-    //GET
-    public IActionResult Upsert(int? id)  //insert+update = upsert 
-    {
-        Product Product = new();
+        //GET
+        public IActionResult Upsert(int? id)  //insert+update = upsert 
+        {
+            //use for dropdown menu 
+            //now we use viewbag for transfer the data from controller to view
+            ProductVM productVM = new()
+            {
+                Product = new(),
+                CategoryList = _unitOfWork.Category.GetAll().Select(i => new SelectListItem
+                {
+                    Text = i.Name,
+                    Value = i.ID.ToString()
+                }),
+                CoverTypeList = _unitOfWork.CoverType.GetAll().Select(i => new SelectListItem
+                {
+                    Text = i.Name,
+                    Value = i.Id.ToString()
+                }),
+            };
 
-           IEnumerable < SelectListItem > CategoryList = _unitOfWork.Category.GetAll().Select(
-           u => new SelectListItem
-           {
-               Text = u.Name,
-               Value = u.ID.ToString()
-           });
-           IEnumerable < SelectListItem > CoverTypeList = _unitOfWork.CoverType.GetAll().Select(
-           u => new SelectListItem
-           {
-               Text = u.Name,
-               Value = u.Id.ToString()
-           });
-           
-           
-           if (id == null || id == 0)
-           {
-               //create product
-               ViewBag.CategoryList = CategoryList;
-           
-               return View(Product);
-           }
-           else
-           {
-               //update product
-           }
-           return View(Product);
+            if (id == null || id == 0)
+            {
+                //create product
+
+                //it(CategoryList) can be any name which we use in view
+                /*ViewBag.CategoryList = CategoryList; //add into the viewbag
+                ViewData["CoverTypeList"] = CoverTypeList;*/
+                return View(productVM);
+            }
+            else
+            {
+                //update product
+            }
+            return View(productVM);
         }
 
         //Post
         [HttpPost]
-        [AutoValidateAntiforgeryToken] 
+        [AutoValidateAntiforgeryToken]
         public IActionResult Upsert(Product obj)  //in validation check model is valid or not (Require properties have or not)
         {
-            
+
             if (ModelState.IsValid)
             {
-                _unitOfWork.Product.Update(obj); 
-                _unitOfWork.Save(); 
+                _unitOfWork.Product.Update(obj);
+                _unitOfWork.Save();
                 TempData["success"] = "Product updated successfully";
                 return RedirectToAction("Index");
             }
@@ -83,22 +88,22 @@ namespace BulkyBookWeb.Controllers;
             {
                 return NotFound();
             }
-            
-            var CoverTypeFromDbFirst = _unitOfWork.CoverType.GetFirstOrDefault(u=>u.Id == id); 
+
+            var CoverTypeFromDbFirst = _unitOfWork.CoverType.GetFirstOrDefault(u => u.Id == id);
 
             if (CoverTypeFromDbFirst == null)
             {
                 return NotFound();
             }
-            return View(CoverTypeFromDbFirst); 
+            return View(CoverTypeFromDbFirst);
         }
 
         //Post
-        [HttpPost,ActionName("Delete")]
-        [AutoValidateAntiforgeryToken]  
+        [HttpPost, ActionName("Delete")]
+        [AutoValidateAntiforgeryToken]
         public IActionResult DeletePOST(int? id)  //in validation check model is valid or not (Require properties have or not)
         {
-           
+
             var obj = _unitOfWork.CoverType.GetFirstOrDefault(u => u.Id == id); //add line after use repo
             if (obj == null)
             {
@@ -106,9 +111,10 @@ namespace BulkyBookWeb.Controllers;
             }
 
             _unitOfWork.CoverType.Remove(obj);
-         
+
             _unitOfWork.Save();
             TempData["success"] = "CoverType deleted successfully";
-            return RedirectToAction("Index"); 
+            return RedirectToAction("Index");
         }
     }
+}
