@@ -10,13 +10,15 @@ namespace BulkyBookWeb.Controllers
     [Area("Admin")]  //explicity - not required it automatically find
     public class ProductController : Controller
     {
-        //private readonly ApplicationDbContext _db;
-        //private readonly ICoverTypeRepository _db;
         private readonly IUnitOfWork _unitOfWork;
-
-        public ProductController(IUnitOfWork db)
+        //require for wwwroot folder path
+        private readonly IWebHostEnvironment _hostEnvironment; 
+         
+        public ProductController(IUnitOfWork unitOfWork ,IWebHostEnvironment hostEnvironment)
         {
-            _unitOfWork = db;
+            //inject by DI
+            _unitOfWork = unitOfWork;
+            _hostEnvironment = hostEnvironment;
         }
 
         public IActionResult Index()
@@ -67,14 +69,27 @@ namespace BulkyBookWeb.Controllers
         //Post
         [HttpPost]
         [AutoValidateAntiforgeryToken]
-        public IActionResult Upsert(Product obj)  //in validation check model is valid or not (Require properties have or not)
+        public IActionResult Upsert(ProductVM obj,IFormFile file)  //in validation check model is valid or not (Require properties have or not)
         {
-
             if (ModelState.IsValid)
             {
-                _unitOfWork.Product.Update(obj);
+                string wwwRootPath = _hostEnvironment.WebRootPath;
+                if (file != null)
+                {
+                    //to rename
+                    string fileName = Guid.NewGuid().ToString(); 
+                    var uploads = Path.Combine(wwwRootPath,@"images\products");
+                    var extension = Path.GetExtension(file.FileName);
+
+                    using (var fileStreams = new FileStream(Path.Combine(uploads, fileName + extension), FileMode.Create))
+                    {
+                        file.CopyTo(fileStreams);
+                    }
+                    obj.Product.ImageUrl = @"\images\products\" + fileName + extension;
+                }
+                _unitOfWork.Product.Add(obj.Product);
                 _unitOfWork.Save();
-                TempData["success"] = "Product updated successfully";
+                TempData["success"] = "Product created successfully";
                 return RedirectToAction("Index");
             }
             return View(obj);
