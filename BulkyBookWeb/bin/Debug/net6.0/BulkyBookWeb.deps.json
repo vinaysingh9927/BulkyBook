@@ -3158,6 +3158,9 @@
         }
       },
       "BulkyBook.Models/1.0.0": {
+        "dependencies": {
+          "Microsoft.AspNetCore.Mvc.ViewFeatures": "2.2.0"
+        },
         "runtime": {
           "BulkyBook.Models.dll": {}
         },
