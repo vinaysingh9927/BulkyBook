@@ -4,8 +4,7 @@ using BulkyBook.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace BulkyBookWeb.Controllers
-{
+namespace BulkyBookWeb.Controllers;
     [Area("Admin")]  //explicity - not required it automatically find
     public class ProductController : Controller
     {
@@ -13,62 +12,55 @@ namespace BulkyBookWeb.Controllers
         //private readonly ICoverTypeRepository _db;
         private readonly IUnitOfWork _unitOfWork;
 
-        public ProductController(IUnitOfWork db) 
+        public ProductController(IUnitOfWork db)
         {
             _unitOfWork = db;
         }
 
         public IActionResult Index()
-        { 
-            IEnumerable<CoverType> objCoverTypeList = _unitOfWork.CoverType.GetAll(); //to use unityof work.
-            return View(objCoverTypeList);
-        }
-
-
-        //Update+Insert both Functionality in same action Upsert
-
-        //GET
-        public IActionResult Upsert(int? id)  //insert+update = upsert 
         {
-            Product product = new Product();
-            IEnumerable<SelectListItem> CategoryList = _unitOfWork.Category.GetAll().Select(
-                u=> new SelectListItem
-                {
-                    Text = u.Name,
-                    Value =u.ID.ToString() 
-                });
-            IEnumerable<SelectListItem> CoverTypeList = _unitOfWork.CoverType.GetAll().Select(
-                u => new SelectListItem
-                {
-                    Text = u.Name,
-                    Value = u.Id.ToString()
-                });
-            /*if (id == null || id == 0)
-            {
-                //create product
-                ViewBag.CategoryList = CategoryList;
-                return NotFound(product);
-            }
-            else
-            {
-                //update product
-            }*/
-            return View(product); 
+            IEnumerable<Product> objProductList = _unitOfWork.Product.GetAll(); //to use unityof work.
+            return View(objProductList);
         }
 
-        public IActionResult TestUpsert(int? id)  //insert+update = upsert 
-        {
-            Product product = new Product();
-            /*if (id == null || id == 0)
-            {
-                //create product
-                return NotFound(product);
-            }*/
-            return View(product);
+
+    //Update+Insert both Functionality in same action Upsert
+
+    //GET
+    public IActionResult Upsert(int? id)  //insert+update = upsert 
+    {
+        Product Product = new();
+
+           IEnumerable < SelectListItem > CategoryList = _unitOfWork.Category.GetAll().Select(
+           u => new SelectListItem
+           {
+               Text = u.Name,
+               Value = u.ID.ToString()
+           });
+           IEnumerable < SelectListItem > CoverTypeList = _unitOfWork.CoverType.GetAll().Select(
+           u => new SelectListItem
+           {
+               Text = u.Name,
+               Value = u.Id.ToString()
+           });
+           
+           
+           if (id == null || id == 0)
+           {
+               //create product
+               ViewBag.CategoryList = CategoryList;
+           
+               return View(Product);
+           }
+           else
+           {
+               //update product
+           }
+           return View(Product);
         }
 
-            //Post
-            [HttpPost]
+        //Post
+        [HttpPost]
         [AutoValidateAntiforgeryToken] 
         public IActionResult Upsert(Product obj)  //in validation check model is valid or not (Require properties have or not)
         {
@@ -77,7 +69,7 @@ namespace BulkyBookWeb.Controllers
             {
                 _unitOfWork.Product.Update(obj); 
                 _unitOfWork.Save(); 
-                TempData["success"] = "CoverType updated successfully";
+                TempData["success"] = "Product updated successfully";
                 return RedirectToAction("Index");
             }
             return View(obj);
@@ -120,4 +112,3 @@ namespace BulkyBookWeb.Controllers
             return RedirectToAction("Index"); 
         }
     }
-}
