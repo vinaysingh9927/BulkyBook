@@ -71,7 +71,7 @@ namespace BulkyBookWeb.Controllers
         //Post
         [HttpPost]
         [AutoValidateAntiforgeryToken]
-        public IActionResult Upsert(ProductVM obj,IFormFile file)  //in validation check model is valid or not (Require properties have or not)
+        public IActionResult Upsert(ProductVM obj,IFormFile? file)  //in validation check model is valid or not (Require properties have or not)
         {
             if (ModelState.IsValid)
             {
@@ -93,8 +93,6 @@ namespace BulkyBookWeb.Controllers
                             System.IO.File.Delete(oldImagePath);
                         }
                     }
-
-
                     using (var fileStreams = new FileStream(Path.Combine(uploads, fileName + extension), FileMode.Create))
                     {
                         file.CopyTo(fileStreams);
