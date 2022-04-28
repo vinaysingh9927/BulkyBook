@@ -1,6 +1,7 @@
 ﻿using BulkyBook.DataAccess.Repository.IRepository;
 using BulkyBook.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace BulkyBookWeb.Controllers
@@ -19,7 +20,8 @@ namespace BulkyBookWeb.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            IEnumerable<Product> productList = _unitOfWork.Product.GetAll(includeProperties:"Category,CoverType");
+            return View(productList);
         }
 
         public IActionResult Privacy()
