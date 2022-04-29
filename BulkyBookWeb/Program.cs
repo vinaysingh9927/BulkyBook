@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Identity;
 var builder = WebApplication.CreateBuilder(args); 
 var connectionString = builder.Configuration.GetConnectionString("ApplicationDbContextConnection");;
 
-/*builder.Services.AddDbContext<ApplicationDbContext>(options =>
+/*builder.Services.AddDbContext<ApplicationDbContext>(options =>any
     options.UseSqlServer(connectionString));;*/    //added by identity
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
