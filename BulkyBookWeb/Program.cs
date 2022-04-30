@@ -5,13 +5,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args); 
-var connectionString = builder.Configuration.GetConnectionString("ApplicationDbContextConnection");;
 
-/*builder.Services.AddDbContext<ApplicationDbContext>(options =>any
+/*var connectionString = builder.Configuration.GetConnectionString("ApplicationDbContextConnection");
+builder.Services.AddDbContext<ApplicationDbContext>(options =>any
     options.UseSqlServer(connectionString));;*/    //added by identity
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-    .AddEntityFrameworkStores<ApplicationDbContext>();;
+
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -22,8 +21,11 @@ builder.Services.AddControllersWithViews();
     ));
 */
 
+builder.Services.AddDefaultIdentity<IdentityUser>()
+    .AddEntityFrameworkStores<ApplicationDbContext>(); //add by identity for user
+
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(
-            builder.Configuration.GetConnectionString("DefaulConnection")
+            builder.Configuration.GetConnectionString("DefaulConnection") //it can also be build seperatlely then pass. 
     ));
 
 //builder.Services.AddScoped<ICategoryRepository, CategoryRepository>(); //replace by UnitOfWork
@@ -44,10 +46,10 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-app.UseAuthentication();;
+app.UseAuthentication(); //use to identity of user
 
 app.UseAuthorization();
-
+app.MapRazorPages(); // to map asp-page 
 app.MapControllerRoute(
     name: "default",
     pattern: "{area=Customer}/{controller=Home}/{action=Index}/{id?}");
