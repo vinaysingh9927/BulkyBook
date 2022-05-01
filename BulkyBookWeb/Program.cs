@@ -3,14 +3,10 @@ using BulkyBook.DataAccess.Repository;
 using BulkyBook.DataAccess.Repository.IRepository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
+using BulkyBook.Utility;
+using Microsoft.AspNetCore.Identity.UI.Services;
 
 var builder = WebApplication.CreateBuilder(args); 
-
-/*var connectionString = builder.Configuration.GetConnectionString("ApplicationDbContextConnection");
-builder.Services.AddDbContext<ApplicationDbContext>(options =>any
-    options.UseSqlServer(connectionString));;*/    //added by identity
-
-
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -20,17 +16,17 @@ builder.Services.AddControllersWithViews();
             builder.Configuration.GetConnectionString("DefaultConnection2")
     ));
 */
-
-builder.Services.AddDefaultIdentity<IdentityUser>()
-    .AddEntityFrameworkStores<ApplicationDbContext>(); //add by identity for user
-
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(
             builder.Configuration.GetConnectionString("DefaulConnection") //it can also be build seperatlely then pass. 
-    ));
+    )); 
+
+builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddDefaultTokenProviders()
+    .AddEntityFrameworkStores<ApplicationDbContext>(); //add by identity for user
 
 //builder.Services.AddScoped<ICategoryRepository, CategoryRepository>(); //replace by UnitOfWork
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>(); //use for take care all the Repository
-//builder.Services.AddRazorPages().AddRazorRuntimeCompilation(); //for runtime compilation
+builder.Services.AddSingleton<IEmailSender, EmailSender>();
+builder.Services.AddRazorPages().AddRazorRuntimeCompilation(); //for runtime compilation
 var app = builder.Build();
 
 
