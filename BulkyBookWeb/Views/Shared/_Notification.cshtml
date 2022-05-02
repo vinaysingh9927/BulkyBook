@@ -4,9 +4,19 @@
 *@
 @if(TempData["success"] != null)
 {
-    <h2>@TempData["success"]</h2>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <screip src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></screip>
+    <script type="text/javascript">
+       toastr.error('@TempData["success"]')
+    </script>
+     @*<h2>@TempData["success"]</h2>*@
 }
 @if(TempData["error"] != null)
 {
-    <h2>@TempData["error"]</h2>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <screip src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></screip>
+    <script>
+        toastr.error('@TempData["error"]')
+    </script>
+    @*<h2>@TempData["error"]</h2>*@
 }

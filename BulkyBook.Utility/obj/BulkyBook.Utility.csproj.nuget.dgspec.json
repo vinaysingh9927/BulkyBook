@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\HP\\source\\repos\\BulkyBook\\BulkyBook.Utility\\BulkyBook.Utility.csproj": {}
+    "C:\\Users\\Vinay Singh\\source\\repos\\BulkyBook\\BulkyBook.Utility\\BulkyBook.Utility.csproj": {}
   },
   "projects": {
-    "C:\\Users\\HP\\source\\repos\\BulkyBook\\BulkyBook.Utility\\BulkyBook.Utility.csproj": {
+    "C:\\Users\\Vinay Singh\\source\\repos\\BulkyBook\\BulkyBook.Utility\\BulkyBook.Utility.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\HP\\source\\repos\\BulkyBook\\BulkyBook.Utility\\BulkyBook.Utility.csproj",
+        "projectUniqueName": "C:\\Users\\Vinay Singh\\source\\repos\\BulkyBook\\BulkyBook.Utility\\BulkyBook.Utility.csproj",
         "projectName": "BulkyBook.Utility",
-        "projectPath": "C:\\Users\\HP\\source\\repos\\BulkyBook\\BulkyBook.Utility\\BulkyBook.Utility.csproj",
-        "packagesPath": "C:\\Users\\HP\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\HP\\source\\repos\\BulkyBook\\BulkyBook.Utility\\obj\\",
+        "projectPath": "C:\\Users\\Vinay Singh\\source\\repos\\BulkyBook\\BulkyBook.Utility\\BulkyBook.Utility.csproj",
+        "packagesPath": "C:\\Users\\Vinay Singh\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Vinay Singh\\source\\repos\\BulkyBook\\BulkyBook.Utility\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\HP\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\Vinay Singh\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -43,6 +39,12 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Identity.UI": {
+              "target": "Package",
+              "version": "[6.0.4, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",

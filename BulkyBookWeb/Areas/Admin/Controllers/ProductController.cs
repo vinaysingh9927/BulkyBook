@@ -62,14 +62,16 @@ namespace BulkyBookWeb.Controllers
             else
             {
                 //update product
+                productVM.Product = _unitOfWork.Product.GetFirstOrDefault(u => u.Id == id);
+                return View(productVM);
             }
-            return View(productVM);
+            //return View(productVM);
         }
 
         //Post
         [HttpPost]
         [AutoValidateAntiforgeryToken]
-        public IActionResult Upsert(ProductVM obj,IFormFile file)  //in validation check model is valid or not (Require properties have or not)
+        public IActionResult Upsert(ProductVM obj,IFormFile? file)  //in validation check model is valid or not (Require properties have or not)
         {
             if (ModelState.IsValid)
             {
@@ -81,56 +83,37 @@ namespace BulkyBookWeb.Controllers
                     var uploads = Path.Combine(wwwRootPath,@"images\products");
                     var extension = Path.GetExtension(file.FileName);
 
+                    //when we update then we have to check image in database
+                    //old image will be remove here
+                    if(obj.Product.ImageUrl != null) //existing image in database
+                    {
+                        var oldImagePath = Path.Combine(wwwRootPath, obj.Product.ImageUrl.TrimStart('\\'));
+                        if (System.IO.File.Exists(oldImagePath)) //if find then delete image
+                        {
+                            System.IO.File.Delete(oldImagePath);
+                        }
+                    }
                     using (var fileStreams = new FileStream(Path.Combine(uploads, fileName + extension), FileMode.Create))
                     {
                         file.CopyTo(fileStreams);
                     }
                     obj.Product.ImageUrl = @"\images\products\" + fileName + extension;
                 }
-                _unitOfWork.Product.Add(obj.Product);
+                if (obj.Product.Id == 0)
+                {
+                    _unitOfWork.Product.Add(obj.Product);
+                }
+                else
+                {
+                    _unitOfWork.Product.Update(obj.Product);
+                }
                 _unitOfWork.Save();
                 TempData["success"] = "Product created successfully";
                 return RedirectToAction("Index");
             }
             return View(obj);
         }
-
-        //update functionality
-        //GET
-        public IActionResult Delete(int? id)
-        {
-            if (id == null || id == 0)
-            {
-                return NotFound();
-            }
-
-            var CoverTypeFromDbFirst = _unitOfWork.CoverType.GetFirstOrDefault(u => u.Id == id);
-
-            if (CoverTypeFromDbFirst == null)
-            {
-                return NotFound();
-            }
-            return View(CoverTypeFromDbFirst);
-        }
-
-        //Post
-        [HttpPost, ActionName("Delete")]
-        [AutoValidateAntiforgeryToken]
-        public IActionResult DeletePOST(int? id)  //in validation check model is valid or not (Require properties have or not)
-        {
-
-            var obj = _unitOfWork.CoverType.GetFirstOrDefault(u => u.Id == id); //add line after use repo
-            if (obj == null)
-            {
-                return NotFound();
-            }
-
-            _unitOfWork.CoverType.Remove(obj);
-
-            _unitOfWork.Save();
-            TempData["success"] = "CoverType deleted successfully";
-            return RedirectToAction("Index");
-        }
+        
 
         //api call
 
@@ -140,6 +123,27 @@ namespace BulkyBookWeb.Controllers
         {
             var productList = _unitOfWork.Product.GetAll(includeProperties:"Category,CoverType");
             return Json(new { data = productList });
+        }
+        //Post
+        [HttpDelete]
+        /*[AutoValidateAntiforgeryToken] */
+        public IActionResult Delete(int? id)  //in validation check model is valid or not (Require properties have or not)
+        {
+            var obj = _unitOfWork.Product.GetFirstOrDefault(u => u.Id == id); //add line after use repo
+            if (obj == null)
+            {
+                return Json(new { success = false,message = "Error while deleting" });
+            }
+
+            var oldImagePath = Path.Combine(_hostEnvironment.WebRootPath, obj.ImageUrl.TrimStart('\\'));
+            if (System.IO.File.Exists(oldImagePath)) //if find then delete image
+            {
+                System.IO.File.Delete(oldImagePath);
+            }
+
+            _unitOfWork.Product.Remove(obj);
+            _unitOfWork.Save();
+            return Json(new { success = true, message = "Deleted Successful" });
         }
         #endregion
     }
