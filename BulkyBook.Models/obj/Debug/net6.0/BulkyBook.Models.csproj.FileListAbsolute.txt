@@ -1,15 +1,3 @@
-C:\Users\Vinay Singh\source\repos\BulkyBook\BulkyBook.Models\bin\Debug\net6.0\BulkyBook.Models.deps.json
-C:\Users\Vinay Singh\source\repos\BulkyBook\BulkyBook.Models\bin\Debug\net6.0\BulkyBook.Models.dll
-C:\Users\Vinay Singh\source\repos\BulkyBook\BulkyBook.Models\bin\Debug\net6.0\BulkyBook.Models.pdb
-C:\Users\Vinay Singh\source\repos\BulkyBook\BulkyBook.Models\obj\Debug\net6.0\BulkyBook.Models.csproj.AssemblyReference.cache
-C:\Users\Vinay Singh\source\repos\BulkyBook\BulkyBook.Models\obj\Debug\net6.0\BulkyBook.Models.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\Vinay Singh\source\repos\BulkyBook\BulkyBook.Models\obj\Debug\net6.0\BulkyBook.Models.AssemblyInfoInputs.cache
-C:\Users\Vinay Singh\source\repos\BulkyBook\BulkyBook.Models\obj\Debug\net6.0\BulkyBook.Models.AssemblyInfo.cs
-C:\Users\Vinay Singh\source\repos\BulkyBook\BulkyBook.Models\obj\Debug\net6.0\BulkyBook.Models.csproj.CoreCompileInputs.cache
-C:\Users\Vinay Singh\source\repos\BulkyBook\BulkyBook.Models\obj\Debug\net6.0\BulkyBook.Models.dll
-C:\Users\Vinay Singh\source\repos\BulkyBook\BulkyBook.Models\obj\Debug\net6.0\refint\BulkyBook.Models.dll
-C:\Users\Vinay Singh\source\repos\BulkyBook\BulkyBook.Models\obj\Debug\net6.0\BulkyBook.Models.pdb
-C:\Users\Vinay Singh\source\repos\BulkyBook\BulkyBook.Models\obj\Debug\net6.0\ref\BulkyBook.Models.dll
 C:\Users\HP\source\repos\BulkyBook\BulkyBook.Models\bin\Debug\net6.0\BulkyBook.Models.deps.json
 C:\Users\HP\source\repos\BulkyBook\BulkyBook.Models\bin\Debug\net6.0\BulkyBook.Models.dll
 C:\Users\HP\source\repos\BulkyBook\BulkyBook.Models\bin\Debug\net6.0\BulkyBook.Models.pdb
@@ -22,3 +10,15 @@ C:\Users\HP\source\repos\BulkyBook\BulkyBook.Models\obj\Debug\net6.0\BulkyBook.M
 C:\Users\HP\source\repos\BulkyBook\BulkyBook.Models\obj\Debug\net6.0\refint\BulkyBook.Models.dll
 C:\Users\HP\source\repos\BulkyBook\BulkyBook.Models\obj\Debug\net6.0\BulkyBook.Models.pdb
 C:\Users\HP\source\repos\BulkyBook\BulkyBook.Models\obj\Debug\net6.0\ref\BulkyBook.Models.dll
+C:\Users\Vinay Singh\source\repos\BulkyBook\BulkyBook.Models\bin\Debug\net6.0\BulkyBook.Models.deps.json
+C:\Users\Vinay Singh\source\repos\BulkyBook\BulkyBook.Models\bin\Debug\net6.0\BulkyBook.Models.dll
+C:\Users\Vinay Singh\source\repos\BulkyBook\BulkyBook.Models\bin\Debug\net6.0\BulkyBook.Models.pdb
+C:\Users\Vinay Singh\source\repos\BulkyBook\BulkyBook.Models\obj\Debug\net6.0\BulkyBook.Models.csproj.AssemblyReference.cache
+C:\Users\Vinay Singh\source\repos\BulkyBook\BulkyBook.Models\obj\Debug\net6.0\BulkyBook.Models.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Vinay Singh\source\repos\BulkyBook\BulkyBook.Models\obj\Debug\net6.0\BulkyBook.Models.AssemblyInfoInputs.cache
+C:\Users\Vinay Singh\source\repos\BulkyBook\BulkyBook.Models\obj\Debug\net6.0\BulkyBook.Models.AssemblyInfo.cs
+C:\Users\Vinay Singh\source\repos\BulkyBook\BulkyBook.Models\obj\Debug\net6.0\BulkyBook.Models.csproj.CoreCompileInputs.cache
+C:\Users\Vinay Singh\source\repos\BulkyBook\BulkyBook.Models\obj\Debug\net6.0\BulkyBook.Models.dll
+C:\Users\Vinay Singh\source\repos\BulkyBook\BulkyBook.Models\obj\Debug\net6.0\refint\BulkyBook.Models.dll
+C:\Users\Vinay Singh\source\repos\BulkyBook\BulkyBook.Models\obj\Debug\net6.0\BulkyBook.Models.pdb
+C:\Users\Vinay Singh\source\repos\BulkyBook\BulkyBook.Models\obj\Debug\net6.0\ref\BulkyBook.Models.dll
