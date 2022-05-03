@@ -117,7 +117,7 @@ namespace BulkyBookWeb.Areas.Identity.Pages.Account
             public string? State { get; set; }
             public string? PostalCode { get; set; }
             public string? PhoneNumber { get; set; }
-            public string? Role { get; set; } 
+            public string? Role { get; set; }
 
             public int? CompanyId { get; set; }  
 
@@ -174,6 +174,11 @@ namespace BulkyBookWeb.Areas.Identity.Pages.Account
                 user.PostalCode = Input.PostalCode;
                 user.Name = Input.Name;
                 user.PhoneNumber = Input.PhoneNumber;
+
+                if (Input.Role == SD.Role_User_Comp)
+                {
+                    user.CompanyId = Input.CompanyId;
+                }               
 
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
