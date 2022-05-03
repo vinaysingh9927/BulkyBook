@@ -27,9 +27,13 @@ namespace BulkyBook.DataAccess.Repository
             dbSet.Add(entity); 
         }
         //includeProp - "Category,CoverType"
-        public IEnumerable<T> GetAll(string? includeProperties = null)
+        public IEnumerable<T> GetAll(Expression<Func<T, bool>>? filter = null, string? includeProperties = null)
         {
             IQueryable<T> query = dbSet;
+            if (filter!=null)
+            {
+                query = query.Where(filter);
+            }
             //for display product
             if (includeProperties != null)
             {
