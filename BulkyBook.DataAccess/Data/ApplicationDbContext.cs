@@ -18,5 +18,6 @@ namespace BulkyBook.DataAccess
         public DbSet<Product> Products { get; set; }  //Product table name created in database
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }  
         public DbSet<Company> Companies{ get; set; }   
+        public DbSet<ShoppingCart> ShoppingCarts { get; set; }    
     } 
 }  
