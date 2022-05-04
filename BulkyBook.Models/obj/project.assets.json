@@ -6590,19 +6590,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Vinay Singh\\.nuget\\packages\\": {}
+    "C:\\Users\\HP\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Vinay Singh\\source\\repos\\BulkyBook\\BulkyBook.Models\\BulkyBook.Models.csproj",
+      "projectUniqueName": "C:\\Users\\HP\\source\\repos\\UdemyProject\\BulkyBook\\BulkyBook.Models\\BulkyBook.Models.csproj",
       "projectName": "BulkyBook.Models",
-      "projectPath": "C:\\Users\\Vinay Singh\\source\\repos\\BulkyBook\\BulkyBook.Models\\BulkyBook.Models.csproj",
-      "packagesPath": "C:\\Users\\Vinay Singh\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Vinay Singh\\source\\repos\\BulkyBook\\BulkyBook.Models\\obj\\",
+      "projectPath": "C:\\Users\\HP\\source\\repos\\UdemyProject\\BulkyBook\\BulkyBook.Models\\BulkyBook.Models.csproj",
+      "packagesPath": "C:\\Users\\HP\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\HP\\source\\repos\\UdemyProject\\BulkyBook\\BulkyBook.Models\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\Vinay Singh\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\HP\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
