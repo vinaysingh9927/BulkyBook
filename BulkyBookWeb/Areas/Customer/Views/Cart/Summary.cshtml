@@ -86,7 +86,7 @@
 								<span class="text-info">Order Summary:</span>
 							</h4>
 							<ul class="list-group mb-3">
-								@*@foreach(var details in Model.ListCart)
+								@foreach(var details in Model.ListCart)
 								{
 								<li class="list-group-item d-flex justify-content-between">
 									<div>
@@ -98,8 +98,8 @@
 								}
 								<li class="list-group-item d-flex justify-content-between bg-light">
 									<small class="text-info">Total (USD)</small>
-									<strong class="text-info">@Model.CartTotal.ToString("c")</strong>
-								</li>*@ 
+									<strong class="text-info">@Model.OrderHeader.OrderTotal.ToString("c")</strong>
+								</li> 
 							</ul>
 						</div>
 					</div>
