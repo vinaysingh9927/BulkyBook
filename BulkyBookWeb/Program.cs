@@ -5,8 +5,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using BulkyBook.Utility;
 using Microsoft.AspNetCore.Identity.UI.Services;
+using Stripe;
 
-var builder = WebApplication.CreateBuilder(args); 
+var builder = WebApplication.CreateBuilder(args);  
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -16,10 +17,11 @@ builder.Services.AddControllersWithViews();
             builder.Configuration.GetConnectionString("DefaultConnection2")
     ));
 */
+
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(
             builder.Configuration.GetConnectionString("DefaulConnection") //it can also be build seperatlely then pass. 
-    )); 
-
+    ));
+builder.Services.Configure<StripeSettings>(builder.Configuration.GetSection("Stripe"));  //use for payment 
 builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddDefaultTokenProviders()
     .AddEntityFrameworkStores<ApplicationDbContext>(); //add by identity for user
 
@@ -50,6 +52,9 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+StripeConfiguration.ApiKey = builder.Configuration.GetSection("Stripe:SecretKey").Get<string>(); //for payment
+
 app.UseAuthentication(); //use to identity of user
 
 app.UseAuthorization();

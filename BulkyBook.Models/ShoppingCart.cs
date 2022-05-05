@@ -19,7 +19,7 @@ namespace BulkyBook.Models
         [ValidateNever]
         public Product Product { get; set; }
 
-        [Range(1, 100, ErrorMessage = "Please enter a value between 1 and ")]
+        [Range(1, 100, ErrorMessage = "Please enter a value between 1 and 100")]
         public int Count { get; set; }
 
         public string ApplicationUserId { get; set; }
