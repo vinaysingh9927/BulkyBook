@@ -27,7 +27,7 @@ namespace BulkyBookWeb.Controllers
 
         //Create Functionality
         //GET
-        public IActionResult Create() 
+        public IActionResult Create()
         {
             return View();
         }
@@ -37,7 +37,7 @@ namespace BulkyBookWeb.Controllers
         public IActionResult Create(Category obj)  //in validation check model is valid or not (Require properties have or not)
         {
             //costom validation
-            if(obj.Name == obj.DisplayOrder.ToString())
+            if (obj.Name == obj.DisplayOrder.ToString())
             {
                 //key       error
                 //ModelState.AddModelError("CustomError","The DisplayOrder cannot be exactly match the Name.");
@@ -54,7 +54,7 @@ namespace BulkyBookWeb.Controllers
                 //_db.Save(); //after repo
                 _unitOfWork.Save(); //after use unitofwork
                 TempData["success"] = "Category created successfully";
-                return RedirectToAction("Index"); 
+                return RedirectToAction("Index");
             }
             return View(obj);
         }
@@ -64,9 +64,9 @@ namespace BulkyBookWeb.Controllers
         //Edit/Update Functionality 
 
         //GET
-        public IActionResult Edit(int? id) 
+        public IActionResult Edit(int? id)
         {
-            if (id ==null || id==0)
+            if (id == null || id == 0)
             {
                 return NotFound();
             }
@@ -74,9 +74,9 @@ namespace BulkyBookWeb.Controllers
             //var categoryFromDb = _db.Categories.Find(id);  //based on the primary key it find  
             //var categoryFromDbFirst = _db.Categories.FirstOrDefault(u=>u.ID == id); //not throw exception and return first element of the list 
             //var categoryFromDbFirst = _db.GetFirstOrDefault(u=>u.ID == id); //after repo
-            var categoryFromDbFirst = _unitOfWork.Category.GetFirstOrDefault(u=>u.ID == id); //after use unitofwork
+            var categoryFromDbFirst = _unitOfWork.Category.GetFirstOrDefault(u => u.ID == id); //after use unitofwork
             //var categoryFromDbSingle = _db.Categories.SingleOrDefault(u=>u.ID == id); //throw an exception
-            if (categoryFromDbFirst == null) 
+            if (categoryFromDbFirst == null)
             {
                 return NotFound();
             }
@@ -84,7 +84,7 @@ namespace BulkyBookWeb.Controllers
         }
         //Post
         [HttpPost]
-        [AutoValidateAntiforgeryToken] 
+        [AutoValidateAntiforgeryToken]
         public IActionResult Edit(Category obj)  //in validation check model is valid or not (Require properties have or not)
         {
             //costom validation
@@ -125,7 +125,7 @@ namespace BulkyBookWeb.Controllers
             //way of retreive category
             //var categoryFromDb = _db.Categories.Find(id);  //based on the primary key it find  
             //var categoryFromDbFirst = _db.Categories.FirstOrDefault(u=>u.ID == id); //not throw exception and return first element of the list 
-            var categoryFromDbFirst = _unitOfWork.Category.GetFirstOrDefault(u=>u.ID == id); //after use repo
+            var categoryFromDbFirst = _unitOfWork.Category.GetFirstOrDefault(u => u.ID == id); //after use repo
             //var categoryFromDbSingle = _db.Categories.SingleOrDefault(u=>u.ID == id); //throw an exception
             if (categoryFromDbFirst == null)
             {
@@ -135,8 +135,8 @@ namespace BulkyBookWeb.Controllers
         }
 
         //Post
-        [HttpPost,ActionName("Delete")]
-        [AutoValidateAntiforgeryToken]  
+        [HttpPost, ActionName("Delete")]
+        [AutoValidateAntiforgeryToken]
         public IActionResult DeletePOST(int? id)  //in validation check model is valid or not (Require properties have or not)
         {
             //var obj = _db.Categories.Find(id);
@@ -151,7 +151,7 @@ namespace BulkyBookWeb.Controllers
             //_db.SaveChanges();
             _unitOfWork.Save(); //add after unitofwork
             TempData["success"] = "Category deleted successfully";
-            return RedirectToAction("Index"); 
+            return RedirectToAction("Index");
         }
     }
 }
